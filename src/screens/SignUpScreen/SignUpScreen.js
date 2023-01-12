@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from "./SignUpScreen.style";
 import { View, Text } from "react-native";
-import { Input, Button, Card } from "@rneui/themed";
+import { Input, Card } from "@rneui/themed";
 import { AuthContext } from "../../providers/AuthProvider";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+
+import Logo from "../../components/Logo/Logo";
+import Button from "../../components/Button/Button";
 
 
 const SignUpScreen = (props) => {
@@ -16,12 +19,13 @@ const SignUpScreen = (props) => {
     <AuthContext.Consumer>
       {
         (authContext) => (
-          <View>
+          <View style={styles.containerStyle}>
+            <Logo />
             <Card>
-              <Card.Title>Welcome to AuthApp</Card.Title>
+              <Card.Title>Sign Up</Card.Title>
               <Card.Divider />
               <Input placeholder="Email Address" onChangeText={setEmail} />
-              <Input placeholder="Password" onChangeText={setPassword} />
+              <Input placeholder="Password" onChangeText={setPassword} secureTextEntry={true} />
               <Button
                 title="Sign Up!"
                 type="solid"

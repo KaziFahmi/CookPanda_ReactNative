@@ -23,8 +23,8 @@ const HomeStackScreen = () => {
 const AuthStackScreen = () => {
   return (
     <AuthStack.Navigator initialRouteName="SignIn">
-      <AuthStack.Screen name="SignIn" component={SignInScreen} />
-      <AuthStack.Screen name="SignUp" component={SignUpScreen} />
+      <AuthStack.Screen name="SignIn" component={SignInScreen} options={{headerShown: false}} />
+      <AuthStack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false}} />
     </AuthStack.Navigator>
   );
 };

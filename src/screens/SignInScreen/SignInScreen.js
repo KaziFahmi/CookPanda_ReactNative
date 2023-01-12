@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Input, Button, Card } from "@rneui/themed";
-import styles from "./SignInScreen.style";
+import { Input, Card } from "@rneui/themed";
 import { AuthContext } from "../../providers/AuthProvider";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../../firebase/firebase";
+import Logo from "../../components/Logo/Logo";
+import styles from "./SignInScreen.style";
+import Button from "../../components/Button/Button";
+// import {Button} from "@rneui/themed";
 
 const SignInScreen = (props) => {
   const [email, setEmail] = useState();
@@ -13,12 +16,13 @@ const SignInScreen = (props) => {
   return (
     <AuthContext.Consumer>
       {(authContext) => (
-        <View>
+        <View style={styles.containerStyle}>
+          <Logo />
           <Card>
-            <Card.Title>Welcome to AuthApp</Card.Title>
+            <Card.Title>Sign In</Card.Title>
             <Card.Divider />
             <Input placeholder="Email Address" onChangeText={setEmail}/>
-            <Input placeholder="Password" onChangeText={setPassword}/>
+            <Input placeholder="Password" onChangeText={setPassword} secureTextEntry={true}/>
             <Button
               title="Sign In!"
               type="solid"
@@ -37,7 +41,7 @@ const SignInScreen = (props) => {
               }}
             />
             <Button
-              title="Dont have an Account? Sign Up"
+              title="Don't have an Account? Sign Up"
               type="clear"
               onPress={() => {
                 props.navigation.navigate("SignUp");
