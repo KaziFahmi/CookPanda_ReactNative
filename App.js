@@ -3,9 +3,9 @@ import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "./src/screens/HomeScreen";
-import SignInScreen from "./src/screens/SignInScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+import SignInScreen from "./src/screens/SignInScreen/SignInScreen";
+import SignUpScreen from "./src/screens/SignUpScreen/SignUpScreen";
 
 import { AuthProvider, AuthContext } from "./src/providers/AuthProvider";
 
