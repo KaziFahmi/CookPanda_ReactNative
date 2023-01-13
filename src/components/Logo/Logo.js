@@ -1,13 +1,15 @@
 import React from 'react'
 import { Image, View } from 'react-native'
 import styles from "./Logo.style"
-import Header from "../Header/Header"
+import { Text } from 'react-native-paper'
 
-export default function Logo() {
+const Logo = function Logo() {
   return (
-    <View>
+    <View style={styles.container}>
       <Image source={require('../../../assets/logo.png')} style={styles.image} />
-      <Header>Cook Panda</Header>
+      <Text style={styles.header}> Cook Panda </Text>
     </View>
   ) 
 }
+
+export default Logo;

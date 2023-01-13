@@ -5,7 +5,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     text: '#000000',
-    primary: '#FF3320',
+    primary: '#674FA3',
     secondary: '#414757',
     error: '#f13a59',
   },

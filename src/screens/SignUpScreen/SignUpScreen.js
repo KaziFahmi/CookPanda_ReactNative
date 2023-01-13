@@ -1,37 +1,64 @@
 import React, { useState } from "react";
 import styles from "./SignUpScreen.style";
-import { View, Text } from "react-native";
-import { Input, Card } from "@rneui/themed";
+import { View } from "react-native";
+import { Button, Card } from "@rneui/themed";
 import { AuthContext } from "../../providers/AuthProvider";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
 import Logo from "../../components/Logo/Logo";
-import Button from "../../components/Button/Button";
+import PandaButton from "../../components/Button/Button";
+import InputField from "../../components/InputField/InputField";
+import {emailValidator} from "../../validators/emailValidator";
+import {passwordValidator} from "../../validators/passwordValidator";
 
 
 const SignUpScreen = (props) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState({ value: '', error: '' });
+  const [password, setPassword] = useState({ value: '', error: '' });
 
   return (
     <AuthContext.Consumer>
       {
         (authContext) => (
-          <View style={styles.containerStyle}>
+          <View style={styles.container}>
             <Logo />
             <Card>
-              <Card.Title>Sign Up</Card.Title>
-              <Card.Divider />
-              <Input placeholder="Email Address" onChangeText={setEmail} />
-              <Input placeholder="Password" onChangeText={setPassword} secureTextEntry={true} />
-              <Button
-                title="Sign Up!"
-                type="solid"
+              <Card.Title style={styles.title}>Sign Up</Card.Title>
+              <InputField
+                label="Email"
+                returnKeyType="next"
+                value={email.value}
+                onChangeText={(text) => setEmail({ value: text, error: '' })}
+                error={!!email.error}
+                errorText={email.error}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+              />
+              <InputField
+                label="Password"
+                returnKeyType="done"
+                value={password.value}
+                onChangeText={(text) => setPassword({ value: text, error: '' })}
+                error={!!password.error}
+                errorText={password.error}
+                secureTextEntry
+              />
+              <PandaButton
+                mode="contained"
                 onPress={() => {
-                  // const authContext = getAuth();
-                  createUserWithEmailAndPassword(auth, email, password)
+                  const emailError = emailValidator(email.value);
+                  const passwordError = passwordValidator(password.value);
+                  if (emailError || passwordError) {
+                    setEmail({ ...email, error: emailError });
+                    setPassword({ ...password, error: passwordError });
+                    return;
+                  }
+
+                  createUserWithEmailAndPassword(auth, email.value, password.value)
                     .then((userCredential) => {
                       const user = userCredential.user;
                       authContext.setCurrentUser(user);
@@ -43,7 +70,9 @@ const SignUpScreen = (props) => {
                       alert(errorMessage);
                     });
                 }}
-              />
+              >
+                Sign Up
+              </PandaButton>
               <Button
                 title="Already Have an Account? Sign In!"
                 type="clear"
