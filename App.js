@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+import RecipeDescription from "./src/screens/RecipeDescription/RecipeDescription";
 import SignInScreen from "./src/screens/SignInScreen/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen/SignUpScreen";
 import ResetPasswordScreen from "./src/screens/ResetPasswordScreen/ResetPasswordScreen";
@@ -16,7 +17,8 @@ const AuthStack = createStackNavigator();
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator initialRouteName="Home">
-      <HomeStack.Screen name="Home" component={HomeScreen} />
+    <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
+    <HomeStack.Screen name="RecipeDescription" component={RecipeDescription} options={{headerShown: true}}  />
     </HomeStack.Navigator>
   );
 };
